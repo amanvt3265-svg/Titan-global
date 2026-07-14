@@ -28,10 +28,10 @@ export const company = {
     "Auckland's premium container transport and cartage specialists — moving import, export and heavy freight between the ports and your door.",
 
   // ── Contact (edit these to update every page) ─────────────
-  phone: "+64 220 849 292",
-  phoneHref: "tel:+64220849292",
-  dispatchPhone: "+64 220 849 292",
-  dispatchPhoneHref: "tel:+64220849292",
+  phone: "+64 220 910 555",
+  phoneHref: "tel:+64220910555",
+  dispatchPhone: "+64 220 910 555",
+  dispatchPhoneHref: "tel:+64220910555",
   email: "dispatch@titanglobal.co.nz",
   emailHref: "mailto:dispatch@titanglobal.co.nz",
   /**
