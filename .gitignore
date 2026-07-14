@@ -3,11 +3,9 @@
 /.pnp
 .pnp.*
 
-# ── Next.js build output ──────────────────────────────────
+# ── Next.js ──────────────────────────────────────────────
 /.next/
 /out/
-
-# ── Production build ──────────────────────────────────────
 /build
 
 # ── Environment files ─────────────────────────────────────
@@ -19,11 +17,29 @@
 *.tsbuildinfo
 next-env.d.ts
 
-# ── Debug logs ────────────────────────────────────────────
+# ── Logs ──────────────────────────────────────────────────
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-*.log
+
+# ── Testing / coverage ────────────────────────────────────
+test-results/
+playwright-report/
+coverage/
+.nyc_output/
+verification-screenshots/
+
+# ── Screenshots / temp ────────────────────────────────────
+shot-*.png
+screenshots/
+tmp/
+temp/
+.cache/
+.tmp
+*.tmp
+*.bak
+*.old
 
 # ── OS files ──────────────────────────────────────────────
 .DS_Store
@@ -44,24 +60,3 @@ Thumbs.db
 
 # ── Claude AI settings (personal) ─────────────────────────
 .claude/
-
-# ── Temp / cache files ────────────────────────────────────
-.tmp
-*.tmp
-*.bak
-*.old
-.cache/
-tmp/
-temp/
-
-# ── Screenshots / test outputs ────────────────────────────
-shot-*.png
-screenshots/
-test-results/
-playwright-report/
-coverage/
-
-verification-screenshots/
-playwright-report/
-test-results/
-*.log
