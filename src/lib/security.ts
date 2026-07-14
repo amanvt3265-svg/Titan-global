@@ -87,13 +87,22 @@ export function rateLimited(ip: string): boolean {
 }
 
 // ── Request metadata (IP + origin), read from headers() ──────
-export async function requestMeta(): Promise<{ ip: string; origin: string }> {
+export async function requestMeta(): Promise<{ ip: string; origin: string; host: string; referer: string }> {
   const h = await headers();
   const fwd = h.get("x-forwarded-for");
   const ip = fwd ? fwd.split(",")[0].trim() : h.get("x-real-ip") || "unknown";
   const origin = h.get("origin") || "";
-  return { ip, origin };
+  const host = h.get("host") || "";
+  const referer = h.get("referer") || "";
+  return { ip, origin, host, referer };
 }
+
+// ── Trusted origin list ──────────────────────────────────────
+// Production domains + Vercel preview deployments.
+const TRUSTED_DOMAINS = [
+  "titanglobaltransport.co.nz",
+  "titanglobal.co.nz",
+];
 
 // ── Origin allow-list check (CSRF defence-in-depth) ──────────
 // Server Actions already carry Next.js CSRF protection; this adds a
@@ -103,19 +112,35 @@ export function isTrustedOrigin(origin: string): boolean {
   if (!origin) return true;
   try {
     const host = new URL(origin).host;
+
+    // Local development
     if (/^localhost(:\d+)?$/.test(host) || /^127\.0\.0\.1(:\d+)?$/.test(host))
       return true;
 
+    // Vercel preview deployments (*.vercel.app)
+    if (/\.vercel\.app$/.test(host)) return true;
+
+    // Strip www prefix for comparison
+    const apex = host.replace(/^www\./, "");
+
+    // Check against configured domain from company.url
     let configuredApex = "";
     try {
       configuredApex = new URL(company.url).host.replace(/^www\./, "");
     } catch {
       /* ignore malformed configured url */
     }
-    if (!configuredApex) return false;
 
-    const apex = host.replace(/^www\./, "");
-    return apex === configuredApex || apex.endsWith(`.${configuredApex}`);
+    // Build the full trusted list: hardcoded + config-driven
+    const trusted = new Set(TRUSTED_DOMAINS);
+    if (configuredApex) trusted.add(configuredApex);
+
+    // Match exact domain or any subdomain of a trusted domain
+    for (const domain of trusted) {
+      if (apex === domain || apex.endsWith(`.${domain}`)) return true;
+    }
+
+    return false;
   } catch {
     return false;
   }

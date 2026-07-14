@@ -1,8 +1,7 @@
 // ═══════════════════════════════════════════════════════════════
 //  Shared Zod schemas + validation primitives for the contact and
-//  quote forms. Safe to import from both client (react-hook-form)
-//  and server (Server Action) code — contains no secrets or
-//  server-only APIs.
+//  quote forms. Safe to import from both client and server code —
+//  contains no secrets or server-only APIs.
 // ═══════════════════════════════════════════════════════════════
 
 import { z } from "zod";

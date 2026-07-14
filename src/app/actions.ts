@@ -47,10 +47,16 @@ export async function submitContact(
   _prev: FormState,
   formData: FormData
 ): Promise<FormState> {
-  const { ip, origin } = await requestMeta();
+  const { ip, origin, host, referer } = await requestMeta();
 
   if (!isTrustedOrigin(origin)) {
-    logRequest("contact", "rejected", { reason: "bad_origin", ip });
+    logRequest("contact", "rejected", {
+      reason: "bad_origin",
+      ip,
+      origin,
+      host,
+      referer: referer.slice(0, 120),
+    });
     return { ok: false, message: GENERIC_ERROR };
   }
 
@@ -163,10 +169,16 @@ export async function submitQuote(
   _prev: FormState,
   formData: FormData
 ): Promise<FormState> {
-  const { ip, origin } = await requestMeta();
+  const { ip, origin, host, referer } = await requestMeta();
 
   if (!isTrustedOrigin(origin)) {
-    logRequest("quote", "rejected", { reason: "bad_origin", ip });
+    logRequest("quote", "rejected", {
+      reason: "bad_origin",
+      ip,
+      origin,
+      host,
+      referer: referer.slice(0, 120),
+    });
     return { ok: false, message: GENERIC_ERROR };
   }
 
