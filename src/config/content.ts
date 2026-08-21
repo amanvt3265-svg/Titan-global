@@ -220,10 +220,9 @@ export interface Stat {
 }
 
 export const stats: Stat[] = [
-  { value: "12,000+", label: "Containers Moved" },
   { value: "98.6%", label: "On-Time Rate" },
   { value: "24/7", label: "Dispatch & Support" },
-  { value: "15+", label: "Years On The Road" },
+  { value: "7+", label: "Years On The Road" },
 ];
 
 export const whyTitan = [
@@ -246,7 +245,7 @@ export const coverage = [
   { region: "Auckland Metro", detail: "Daily wharf, MetroPort and depot cartage across the region." },
   { region: "Upper North Island", detail: "Hamilton, Tauranga and the Waikato/BOP freight corridors." },
   { region: "Lower North Island", detail: "Line-haul connections through to Palmerston North and Wellington." },
-  { region: "South Island", detail: "Christchurch and key South Island centres via managed line-haul." },
+  { region: "South Island", detail: "Christchurch and key South Island centres via managed line-haul in coming Future Plans." },
 ];
 
 export const certifications = [
