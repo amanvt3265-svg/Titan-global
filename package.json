@@ -2,7 +2,7 @@
   "name": "titan-global-transport",
   "version": "1.0.0",
   "private": true,
-  "description": "Premium website for Titan Global Transport — Auckland, New Zealand.",
+  "description": "Titan Global Transport — Auckland, New Zealand.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
